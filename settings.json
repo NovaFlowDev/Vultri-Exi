@@ -1,0 +1,10 @@
+{
+  "swc_107_enabled": true,
+  "swc_104_enabled": true,
+  "swc_105_enabled": true,
+  "swc_115_enabled": true,
+  "default_llm_provider": "openai",
+  "default_model": "openai/gpt-4o",
+  "llm_timeout_seconds": 60,
+  "use_llm": true
+}
