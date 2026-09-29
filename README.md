@@ -76,3 +76,28 @@ Vult-Exi gives developers a **free, instant first pass** so obvious bugs never r
 ---
 
 ## ⚙️ How It Works
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract VulnerableVault {
+    mapping(address => uint256) public balances;
+    address public owner;
+
+    constructor(address _owner) {
+        owner = _owner;
+    }
+
+    function deposit() external payable {
+        balances[msg.sender] += msg.value;
+    }
+
+    function withdraw() external {
+        uint256 amount = balances[msg.sender];
+        (bool ok, ) = msg.sender.call{value: amount}("");
+        balances[msg.sender] = 0;
+    }
+
+    function setOwner(address newOwner) public {
+        owner = newOwner;
+    }
+}
