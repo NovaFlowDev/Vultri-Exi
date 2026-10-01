@@ -145,7 +145,7 @@ export function extractFunctions(stripped: string): FunctionIR[] {
     const signature = stripped.slice(sigStart, braceStart);
     const body = stripped.slice(braceStart + 1, braceEnd);
 
-    let name = kind;
+    let name: string = kind;
     let paramsRaw = "";
     if (kind === "function") {
       const fnMatch = signature.match(/\bfunction\s+([A-Za-z_]\w*)\s*\(([^)]*)\)/);
