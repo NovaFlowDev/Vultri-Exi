@@ -1,194 +1,57 @@
-<div align="center">
+ <div align="center"> <img src="assets/banner.svg" alt="Vultri-Exi" width="100%">
 
-# 🛡️ Vultri-Exi
+Catch the bugs that cost millions — before you deploy.
 
-### AI-Powered Smart Contract Security Scanner
+License: MIT Solidity TypeScript Show Image PRs Welcome
 
-**Catch the bugs that cost millions — before you deploy.**
-
-Paste Solidity. Get findings. Get fixes. In seconds.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Solidity](https://img.shields.io/badge/Solidity-%5E0.8.20-363636)](https://soliditylang.org/)
-[![Status](https://img.shields.io/badge/status-MVP-orange)]()
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/NovaFlowDev/Vultri-Exi/pulls)
-
-[**Try Demo**](#-demo) · [**Quick Start**](#-quick-start) · [**Detection Rules**](#-detection-rules) · [**Roadmap**](#-roadmap) · [**Contribute**](#-contributing)
+Demo · Quick Start · Detection Rules · Roadmap · Contribute
 
 </div>
+🔍 What Is Vultri-Exi?
 
----
+An open-source pre-audit scanner for Solidity contracts. Run it before paying for a manual audit, catch the obvious bugs early, and hand auditors a cleaner codebase.
 
-## 📖 Table of Contents
+📄 Solidity source
+🧱 Layer 1Static heuristics
+🧠 Layer 2LLM reasoning
+📊 Report + fixes
+🧱 Layer 1 — Static heuristics	🧠 Layer 2 — LLM reasoning
+Fast, deterministic pattern matching	Explains why a finding is dangerous
+Runs in milliseconds	Suggests defensive fixes
+Works fully offline	Optional — needs an API key
+💡 Why It Exists
 
-<details>
-<summary>Click to expand</summary>
+Smart contract bugs are catastrophic and irreversible. Manual audits cost $10k–$100k+ and take weeks. Vultri-Exi is a free, instant first pass.
 
-- [What Is Vultri-Exi?](#-what-is-vultri-exi)
-- [Why It Exists](#-why-it-exists)
-- [Features](#-features)
-- [How It Works](#-how-it-works)
-- [Demo](#-demo)
-- [Quick Start](#-quick-start)
-- [Environment Variables](#-environment-variables)
-- [Architecture](#-architecture)
-- [Detection Rules](#-detection-rules)
-- [Example Scan](#-example-scan)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Disclaimer](#-disclaimer)
+<img src="assets/hack-losses.svg" alt="Major smart contract incidents by loss" width="100%">
+✨ Features
+Feature	Status	Version
+🔁 Reentrancy detection	✅	v0.1
+📞 Unchecked external call detection	✅	v0.1
+🔑 Missing access control detection	✅	v0.1
+👻 Zero-address validation	✅	v0.1
+🤖 LLM explanations & fix suggestions	✅	v0.1
+📊 Risk dashboard with severity scoring	✅	v0.1
+🔗 Slither integration	🚧	v0.2
+🧠 Multi-agent adjudication	🔮	v0.3
+📦 Foundry PoC generation	🔮	v0.3
+⚙️ GitHub Action (CI/CD)	🔮	v0.4
+🌐 Multi-chain bytecode scanning	🔮	v0.4
+⚙️ How It Works
+1 · PASTEDrop Solidity into the textbox
+2 · PARSEAST: functions, state vars,calls, modifiers
+3 · STATIC ANALYSIS
+Reentrancy
+Unchecked calls
+Access control
+Zero-address
+4 · LLM EXPLANATIONWhy it's bad + how to fix it
+5 · DASHBOARDRisk score · severity ·patches
+🎬 Demo
 
-</details>
+Input — VulnerableVault.sol
 
----
-
-## 🔍 What Is Vultri-Exi?
-
-Vultri-Exi is an **open-source smart contract security scanner** that combines two layers of defense:
-
-<table>
-<tr>
-<td width="50%">
-
-### 🧱 Layer 1 — Static Heuristics
-Fast, deterministic pattern matching. No AI, no guessing. Just rules.
-
-- ⚡ Runs in milliseconds
-- 🎯 Zero false negatives on known patterns
-- 🔒 Fully offline capable
-
-</td>
-<td width="50%">
-
-### 🧠 Layer 2 — LLM Reasoning
-Human-readable explanations powered by large language models.
-
-- 💬 Explains *why* it's dangerous
-- 🛠️ Suggests defensive fixes
-- 📚 Teaches as it scans
-
-</td>
-</tr>
-</table>
-
-It's designed as a **pre-audit hygiene tool** — run it before spending $50k on a manual audit, catch the obvious bugs early, and hand auditors a cleaner codebase.
-
-> **🎯 Mission:** Make smart contract security accessible to every developer — not just elite auditors.
-
----
-
-## 💡 Why It Exists
-
-Smart contract bugs are **catastrophic and irreversible**. There's no "undo" button on the blockchain.
-
-<table>
-<tr>
-<th align="left">💥 Incident</th>
-<th align="left">Year</th>
-<th align="left">Loss</th>
-<th align="left">Cause</th>
-</tr>
-<tr>
-<td>🔁 The DAO Hack</td>
-<td>2016</td>
-<td><b>$60M</b></td>
-<td>Reentrancy</td>
-</tr>
-<tr>
-<td>🔑 Parity Wallet Freeze</td>
-<td>2017</td>
-<td><b>$150M</b></td>
-<td>Access control</td>
-</tr>
-<tr>
-<td>📞 Wormhole Bridge</td>
-<td>2022</td>
-<td><b>$320M</b></td>
-<td>Unchecked call</td>
-</tr>
-<tr>
-<td>🔑 Ronin Bridge</td>
-<td>2022</td>
-<td><b>$625M</b></td>
-<td>Key compromise</td>
-</tr>
-</table>
-
-**Manual audits are expensive ($10k–$100k+) and slow (weeks).**
-
-Vultri-Exi gives developers a **free, instant first pass** — so obvious bugs never reach production.
-
-> **Use Vultri-Exi to catch the obvious bugs. Hire an auditor to catch the sneaky ones.**
-
----
-
-## ✨ Features
-
-<table>
-<tr>
-<th align="left">Feature</th>
-<th align="center">Status</th>
-<th align="center">Version</th>
-</tr>
-<tr><td>🔁 Reentrancy detection</td><td align="center">✅</td><td align="center">v0.1</td></tr>
-<tr><td>📞 Unchecked external call detection</td><td align="center">✅</td><td align="center">v0.1</td></tr>
-<tr><td>🔑 Missing access control detection</td><td align="center">✅</td><td align="center">v0.1</td></tr>
-<tr><td>👻 Zero-address validation</td><td align="center">✅</td><td align="center">v0.1</td></tr>
-<tr><td>🤖 LLM explanations & fix suggestions</td><td align="center">✅</td><td align="center">v0.1</td></tr>
-<tr><td>📊 Risk dashboard with severity scoring</td><td align="center">✅</td><td align="center">v0.1</td></tr>
-<tr><td>🧠 Multi-agent adjudication (reduce false positives)</td><td align="center">🚧</td><td align="center">v0.3</td></tr>
-<tr><td>🔗 Slither integration</td><td align="center">🚧</td><td align="center">v0.2</td></tr>
-<tr><td>⚙️ CI/CD (GitHub Action)</td><td align="center">🚧</td><td align="center">v0.4</td></tr>
-<tr><td>📦 Foundry PoC generation</td><td align="center">🚧</td><td align="center">v0.3</td></tr>
-<tr><td>🌐 Multi-chain bytecode scanning</td><td align="center">🚧</td><td align="center">v0.4</td></tr>
-</table>
-
----
-
-## ⚙️ How It Works
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  1. PASTE                                                   │
-│     Drop your Solidity source into the text box             │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│  2. PARSE                                                   │
-│     AST generation — functions, state vars, calls, modifiers│
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│  3. STATIC ANALYSIS                                         │
-│     ┌────────────┬────────────┬────────────┬────────────┐  │
-│     │ Reentrancy │ Unchecked  │   Access   │   Zero-    │  │
-│     │  Detector  │   Calls    │  Control   │  Address   │  │
-│     └────────────┴────────────┴────────────┴────────────┘  │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│  4. LLM EXPLANATION                                         │
-│     Each finding → "Why it's bad" + "How to fix it"         │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│  5. DASHBOARD                                               │
-│     Risk score · Findings by severity · Patch suggestions   │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 🎬 Demo
-
-### 📥 Input — `VulnerableVault.sol`
-
-```solidity
+solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
@@ -214,423 +77,183 @@ contract VulnerableVault {
         owner = newOwner;
     }
 }
-```
 
-### 📤 Output
+Output
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  🛡️  VULTR-EXI SCAN REPORT                                  │
-├─────────────────────────────────────────────────────────────┤
-│  Contract:    VulnerableVault                               │
-│  Findings:    5                                             │
-│  Risk Score:  9.1 / 10  ████████████████████░░  CRITICAL    │
-├─────────────────────────────────────────────────────────────┤
-│  #  SEVERITY   CATEGORY               LOCATION              │
-│  1  🔴 CRIT    Reentrancy             withdraw()            │
-│  2  🔴 CRIT    Access Control         setOwner()            │
-│  3  🟠 HIGH    Unprotected Transfer   withdraw()            │
-│  4  🟡 MED     Unchecked Call         withdraw()            │
-│  5  🟢 LOW     Zero-Address           constructor/setOwner  │
-└─────────────────────────────────────────────────────────────┘
-```
+<img src="assets/scan-report.svg" alt="Scan report for VulnerableVault: 5 findings, risk score 9.1/10" width="100%">
 
-### 🧠 LLM Explanation (excerpt)
+LLM explanation (excerpt)
 
-> **Finding #1 — Reentrancy (Critical)**
->
-> This vault follows the *withdraw-then-update* anti-pattern. The external call to `msg.sender` executes **before** `balances[msg.sender]` is zeroed. An attacker contract can re-enter `withdraw()` in its `receive()` function, draining the vault.
->
-> **Fix:** Apply Checks-Effects-Interactions — zero the balance *before* the external call.
->
-> ```solidity
-> balances[msg.sender] = 0;                      // ✅ effects first
-> (bool ok, ) = msg.sender.call{value: amount}("");
-> require(ok, "transfer failed");                // ✅ check result
-> ```
+Finding #1 — Reentrancy (Critical)
 
----
+The external call to msg.sender runs before balances[msg.sender] is zeroed. An attacker contract can re-enter withdraw() from its receive() function and drain the vault.
 
-## 🚀 Quick Start
+Fix: apply Checks-Effects-Interactions.
 
-### Prerequisites
+solidity
+balances[msg.sender] = 0;                      // ✅ effects first
+(bool ok, ) = msg.sender.call{value: amount}("");
+require(ok, "transfer failed");                // ✅ check result
+🚀 Quick Start
 
-- **Node.js** ≥ 18 *(or Python ≥ 3.10 for the backend)*
-- **npm** / **pnpm** / **yarn**
-- An API key from [OpenRouter](https://openrouter.ai/keys) or [OpenAI](https://platform.openai.com/api-keys) *(optional — needed only for AI explanations)*
+Prerequisites: Node.js ≥ 18, and optionally an OpenRouter or OpenAI key for AI explanations.
 
-### Installation
-
-```bash
-# Clone the repo
+bash
 git clone https://github.com/NovaFlowDev/Vultri-Exi.git
 cd Vultri-Exi
-
-# Install dependencies
 npm install
-
-# Set up environment variables
-cp .env.example .env
-# Then edit .env and add your API key
-
-# Launch
+cp .env.example .env   # add your API key
 npm run dev
-```
 
-Open [**http://localhost:3000**](http://localhost:3000) → paste a contract → hit **Run scan**.
+Open http://localhost:3000, paste a contract, and hit Run scan.
 
-### 🐳 Docker (Alternative)
-
-```bash
-docker build -t vultri-exi .
-docker run -p 3000:3000 --env-file .env vultri-exi
-```
-
----
-
-## 🔐 Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-# ─── LLM Provider (pick ONE) ───────────────────────────────
+Environment variables
+env
+# LLM provider (pick ONE)
 OPENROUTER_API_KEY=sk-or-v1-your-key-here
 # OPENAI_API_KEY=sk-your-key-here
 
-# ─── Model Selection (optional) ────────────────────────────
+# Optional
 LLM_MODEL=openai/gpt-4o-mini
-
-# ─── Optional: scan tuning ─────────────────────────────────
 MAX_FILE_SIZE_KB=512
 ENABLE_STATIC_ONLY=false
-```
 
-> ⚠️ **Without an API key:** the scanner still runs static analysis but returns `LLM: skipped_no_key` and omits AI explanations.
+Without an API key, static analysis still runs; the report shows LLM: skipped_no_key and omits AI explanations.
 
----
+🏗️ Architecture
+ui/Next.js dashboard
+scanner/orchestrator
+analyzer/reentrancy · uncheckedCallaccessControl · zeroAddress
+llm/client · prompts · schemas
+OpenRouter / OpenAI
+src/
+├── analyzer/    # static detectors
+├── llm/         # LLM client, prompts, structured-output schemas
+├── scanner/     # orchestrator
+├── ui/          # dashboard
+└── types.ts
+tests/
+└── fixtures/    # known-vulnerable contracts (easy / medium / hard)
 
-## 🏗️ Architecture
+Stack: @solidity-parser/parser · TypeScript · Next.js + Tailwind · Vitest + Foundry
 
-```
-Vultri-Exi/
-├── src/
-│   ├── analyzer/                # Static heuristics
-│   │   ├── reentrancy.ts
-│   │   ├── uncheckedCall.ts
-│   │   ├── accessControl.ts
-│   │   └── zeroAddress.ts
-│   ├── llm/                     # LLM explanation layer
-│   │   ├── client.ts            # OpenRouter / OpenAI wrapper
-│   │   ├── prompts.ts           # System + user prompts
-│   │   └── schemas.ts           # Structured output schemas
-│   ├── scanner/                 # Orchestrator
-│   │   └── index.ts
-│   ├── ui/                      # Dashboard
-│   │   ├── components/
-│   │   └── pages/
-│   └── types.ts                 # Shared TypeScript types
-├── tests/
-│   ├── fixtures/                # Known-vulnerable contracts
-│   │   ├── easy/
-│   │   ├── medium/
-│   │   └── hard/
-│   └── scanner.test.ts
-├── .env.example
-├── package.json
-├── tsconfig.json
-└── README.md
-```
+🧠 Detection Rules
+<details open> <summary><b>🔁 Reentrancy</b> — Critical · <a href="https://swcregistry.io/docs/SWC-107">SWC-107</a></summary>
 
-### 🧰 Tech Stack
+Flags external calls that occur before state updates.
 
-| Layer | Technology |
-|---|---|
-| **Parser** | `@solidity-parser/parser` or `solc` AST |
-| **Static Rules** | TypeScript |
-| **LLM** | OpenRouter / OpenAI with structured outputs |
-| **Frontend** | Next.js + Tailwind CSS |
-| **Backend** | Node.js (or FastAPI if Python) |
-| **Tests** | Vitest + Foundry |
-| **Deploy** | Docker + Vercel / Fly.io |
+solidity
+// ❌ Vulnerable
+(bool ok, ) = target.call{value: amt}("");
+balances[msg.sender] = 0;
 
----
-
-## 🧠 Detection Rules
-
-<details open>
-<summary><b>🔁 Reentrancy (Critical)</b></summary>
-
-Flags external calls (`call`, `send`, `transfer`) that occur **before** state updates.
-
-**Vulnerable pattern:**
-```solidity
-(bool ok, ) = target.call{value: amt}("");  // ⚠️ external call
-balances[msg.sender] = 0;                    // ⚠️ state update AFTER
-```
-
-**Fix:**
-```solidity
-balances[msg.sender] = 0;                    // ✅ effects first
+// ✅ Fixed
+balances[msg.sender] = 0;
 (bool ok, ) = target.call{value: amt}("");
 require(ok, "transfer failed");
-```
+</details> <details> <summary><b>📞 Unchecked External Call</b> — High / Medium · <a href="https://swcregistry.io/docs/SWC-104">SWC-104</a></summary>
 
-**References:** [SWC-107](https://swcregistry.io/docs/SWC-107) · [The DAO Hack](https://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/)
+Flags low-level calls whose return value is ignored.
 
-</details>
+solidity
+// ❌ Vulnerable
+(bool ok, ) = target.call(data);
 
-<details>
-<summary><b>📞 Unchecked External Call (High / Medium)</b></summary>
+// ✅ Fixed
+(bool ok, ) = target.call(data);
+require(ok, "call failed");
+</details> <details> <summary><b>🔑 Missing Access Control</b> — Critical / High · <a href="https://swcregistry.io/docs/SWC-105">SWC-105</a></summary>
 
-Flags low-level calls where the return value is ignored.
+Flags privileged functions (setOwner, upgradeTo, mint, withdraw) with no onlyOwner / onlyRole modifier.
 
-**Vulnerable pattern:**
-```solidity
-(bool ok, ) = target.call(...);
-// `ok` never checked ⚠️
-```
+solidity
+// ❌ Vulnerable
+function setOwner(address newOwner) public { owner = newOwner; }
 
-**Fix:**
-```solidity
-(bool ok, ) = target.call(...);
-require(ok, "call failed");  // ✅
-```
+// ✅ Fixed
+function setOwner(address newOwner) external onlyOwner { owner = newOwner; }
+</details> <details> <summary><b>👻 Zero-Address</b> — Low / Medium · <a href="https://swcregistry.io/docs/SWC-113">SWC-113</a></summary>
 
-**References:** [SWC-104](https://swcregistry.io/docs/SWC-104)
+Flags assignments to privileged state variables without a zero-address check.
 
-</details>
+solidity
+// ❌ Vulnerable
+owner = newOwner;
 
-<details>
-<summary><b>🔑 Missing Access Control (Critical / High)</b></summary>
-
-Flags privileged functions (`setOwner`, `upgradeTo`, `mint`, `withdraw`) with no `onlyOwner` / `onlyRole` modifier.
-
-**Vulnerable pattern:**
-```solidity
-function setOwner(address newOwner) public {  // ⚠️ no modifier
-    owner = newOwner;
-}
-```
-
-**Fix:**
-```solidity
-function setOwner(address newOwner) external onlyOwner {
-    owner = newOwner;
-}
-```
-
-**References:** [SWC-105](https://swcregistry.io/docs/SWC-105) · [Parity Wallet Freeze](https://www.parity.io/blog/a-postmortem-on-the-parity-multi-sig-library-self-destruct/)
-
-</details>
-
-<details>
-<summary><b>👻 Zero-Address (Low / Medium)</b></summary>
-
-Flags assignments of `address(0)` to privileged state variables.
-
-**Vulnerable pattern:**
-```solidity
-owner = newOwner;  // ⚠️ newOwner could be address(0)
-```
-
-**Fix:**
-```solidity
+// ✅ Fixed
 require(newOwner != address(0), "zero address");
 owner = newOwner;
-```
-
-**References:** [SWC-113](https://swcregistry.io/docs/SWC-113)
-
 </details>
-
----
-
-## 📊 Example Scan
-
-Scan output for the **`ProxyVaultDAO`** test contract — a deliberately hard case with cross-function interactions:
-
-```
-┌───────────────────────────────────────────────────────────────┐
-│  🛡️  VULTR-EXI SCAN REPORT — ProxyVaultDAO                    │
-├───────────────────────────────────────────────────────────────┤
-│  Findings:     9                                              │
-│  Risk Score:   9.6 / 10  ████████████████████░  CRITICAL      │
-│  ⚠  Cross-function interactions detected                      │
-├───────────────────────────────────────────────────────────────┤
-│  #  SEVERITY   CATEGORY               FUNCTION                │
-│  1  🔴 CRIT    Storage Collision      upgradeTo / fallback    │
-│  2  🔴 CRIT    Arbitrary Call         execute()               │
-│  3  🔴 CRIT    DoS via Revert         batchWithdraw()         │
-│  4  🟠 HIGH    Reentrancy (missed)    withdrawAll()           │
-│  5  🟠 HIGH    Ownership Sniping      transfer/acceptOwner    │
-│  6  🟠 HIGH    Self-DoS               emergencyPause()        │
-│  7  🟡 MED     Accounting Drift       receive()               │
-│  8  🟡 MED     Zero-Address           transferOwnership()     │
-│  9  🟢 LOW     Forced ETH             fallback()              │
-└───────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 🗺️ Roadmap
-
-<table>
-<tr>
-<th align="left">Version</th>
-<th align="left">Theme</th>
-<th align="left">Highlights</th>
-<th align="center">Status</th>
-</tr>
-<tr>
-<td><b>v0.1</b></td>
-<td>MVP</td>
-<td>4 detectors · LLM layer · dashboard</td>
-<td align="center">✅</td>
-</tr>
-<tr>
-<td><b>v0.2</b></td>
-<td>Depth</td>
-<td>Slither integration · 20+ rules · SARIF export</td>
-<td align="center">🚧</td>
-</tr>
-<tr>
-<td><b>v0.3</b></td>
-<td>Intelligence</td>
-<td>Multi-agent adjudication · Foundry PoCs · FP suppression</td>
-<td align="center">🔮</td>
-</tr>
-<tr>
-<td><b>v0.4</b></td>
-<td>Scale</td>
-<td>GitHub Action · multi-chain · team dashboards · API</td>
-<td align="center">🔮</td>
-</tr>
-<tr>
-<td><b>v1.0</b></td>
-<td>Production</td>
-<td>Full audit-firm workflow · SLAs · enterprise tier</td>
-<td align="center">🌅</td>
-</tr>
-</table>
-
-<details>
-<summary><b>v0.2 — Depth (in progress)</b></summary>
-
-- [ ] Integrate [Slither](https://github.com/crytic/slither) detectors
-- [ ] Add 20+ detection rules (`tx.origin`, `delegatecall`, oracle manipulation)
-- [ ] Structured LLM outputs (JSON schema)
-- [ ] Export findings as SARIF / JSON
-- [ ] Detection benchmarks (DAppSCAN dataset)
-
+🗺️ Roadmap
+v0.1 ✅
+MVP
+4 detectors
+LLM layer
+Dashboard
+v0.2 🚧
+Depth
+Slither integration
+20+ rules
+SARIF export
+v0.3 🔮
+Intelligence
+Multi-agentadjudication
+Foundry PoCs
+FP suppression
+v0.4 🔮
+Scale
+GitHub Action
+Multi-chain
+API + VS Codeextension
+v1.0 🌅
+Production
+Audit-firm workflow
+Enterprise tier
+Vultri-Exi roadmap
+<details> <summary><b>v0.2 — Depth (in progress)</b></summary>
+ Integrate Slither detectors
+ 20+ detection rules (tx.origin, delegatecall, oracle manipulation)
+ Structured LLM outputs (JSON schema)
+ SARIF / JSON export
+ Benchmarks on the DAppSCAN dataset
+</details> <details> <summary><b>v0.3 / v0.4 — planned</b></summary>
+ Multi-agent adjudication (Debator + Skeptic + Judge)
+ Auto-generated Foundry PoCs
+ Reachability-based false-positive suppression
+ Cross-function dataflow analysis
+ GitHub Action, multi-chain scanning, team dashboards, API, VS Code extension
 </details>
+🤝 Contributing
+Fork the repo and create a branch: git checkout -b feat/my-new-detector
+Add a known-vulnerable fixture in tests/fixtures/ and a passing test
+Commit using Conventional Commits: feat: add tx.origin detector
+Open a Pull Request
 
-<details>
-<summary><b>v0.3 — Intelligence (planned)</b></summary>
+Good first issues: tx.origin detector · cross-function reentrancy · Parity Wallet fixture · SARIF export · CLI wrapper (vultri-exi scan ./contracts/)
 
-- [ ] Multi-agent adjudication (Debator + Skeptic + Judge)
-- [ ] Auto-generate Foundry PoCs for confirmed bugs
-- [ ] False-positive suppression via reachability analysis
-- [ ] Historical exploit database matching
-- [ ] Cross-function dataflow analysis
+Code style: strict TypeScript, Prettier + ESLint via pre-commit hooks.
 
-</details>
+Bug reports: include the contract, expected vs. actual output, and your environment (OS, Node version, LLM model).
 
-<details>
-<summary><b>v0.4 — Scale (planned)</b></summary>
+📜 License
 
-- [ ] GitHub Action for CI/CD
-- [ ] Multi-chain bytecode scanning (Ethereum, Base, Arbitrum, Solana)
-- [ ] Team dashboards + saved projects
-- [ ] API access for audit firms
-- [ ] VS Code extension
+MIT — free to use, modify, and distribute, including commercially.
 
-</details>
+⚠️ Disclaimer
 
----
+Vultri-Exi is a helper, not a replacement for a professional audit.
 
-## 🤝 Contributing
+It catches common patterns, not every vulnerability.
+LLM explanations can be wrong — always verify.
+Never deploy to mainnet without a manual audit from a reputable firm.
+Never paste private keys or seed phrases into any scanner.
 
-We welcome contributions from security researchers, Solidity devs, and AI engineers.
-
-### 🚀 How to Contribute
-
-1. **Fork** the repo
-2. **Create a branch**: `git checkout -b feat/my-new-detector`
-3. **Add tests** in `tests/fixtures/` with a known-vulnerable contract
-4. **Commit**: `git commit -m "feat: add tx.origin detector"`
-5. **Push** and open a **Pull Request**
-
-### 🎯 Good First Issues
-
-- [ ] Add a `tx.origin` phishing detector
-- [ ] Improve the reentrancy heuristic to catch cross-function reentrancy
-- [ ] Write a test fixture for the Parity Wallet bug
-- [ ] Add SARIF export support
-- [ ] Build a CLI wrapper (`vultri-exi scan ./contracts/`)
-
-### 📏 Code Style
-
-- **TypeScript** with strict mode
-- **Prettier** + **ESLint** enforced via pre-commit hooks
-- All detectors must ship with a **fixture contract** and a **passing test**
-- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
-
-### 🐛 Reporting Bugs
-
-Open an issue with:
-- The Solidity contract that triggered the bug
-- Expected vs. actual output
-- Your environment (OS, Node version, LLM model)
-
----
-
-## 📜 License
-
-MIT License — see [LICENSE](https://github.com/NovaFlowDev/Vultri-Exi/blob/main/LICENSE) for details.
-
-You're free to use, modify, and distribute this tool, **including commercially**. Attribution appreciated but not required.
-
----
-
-## ⚠️ Disclaimer
-
-**Vultri-Exi is a helper, not a replacement for a professional audit.**
-
-- ✅ It catches **common patterns** — not every vulnerability.
-- ⚠️ LLM explanations can be **wrong** — always verify.
-- 🚫 **Never** deploy to mainnet without a manual audit from a reputable firm.
-- 🔒 Never paste private keys, seed phrases, or secrets into any scanner.
-
-The authors are **not responsible** for any losses incurred from using this tool.
-
-> **Use Vultri-Exi to catch the obvious bugs. Hire an auditor to catch the sneaky ones.**
-
----
-
-## 🙏 Acknowledgments
-
-- [**Slither**](https://github.com/crytic/slither) — inspiration for the detector architecture
-- [**OpenZeppelin**](https://openzeppelin.com/) — security best practices
-- [**Code4rena**](https://code4rena.com/) & [**Sherlock**](https://sherlock.xyz/) — public audit datasets
-- [**SWC Registry**](https://swcregistry.io/) — vulnerability classification
-- The open-source smart contract security community ❤️
-
----
-
-## 📬 Contact
-
-- **Repository:** [github.com/NovaFlowDev/Vultri-Exi](https://github.com/NovaFlowDev/Vultri-Exi)
-- **Issues:** [GitHub Issues](https://github.com/NovaFlowDev/Vultri-Exi/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/NovaFlowDev/Vultri-Exi/discussions)
-
----
+The authors are not responsible for any losses incurred from using this tool.
 
 <div align="center">
 
-### ⭐ If Vultri-Exi helped you catch a bug, star the repo — it helps others find it too.
+⭐ If Vultri-Exi helped you catch a bug, star the repo.
 
-**Built with ❤️ for the smart contract security community**
-
-[⬆ Back to top](#-vultri-exi)
+⬆ Back to top
 
 </div>
